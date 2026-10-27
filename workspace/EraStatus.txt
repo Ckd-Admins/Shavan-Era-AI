@@ -1,0 +1,3 @@
+Welcome to NavoraX
+
+Ab Era properly work kar raha hai. Woh laptop ko shutdown, restart aur mere local agent se connect ho chuka hai.

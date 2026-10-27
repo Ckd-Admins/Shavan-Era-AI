@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Era Agent Voice UI</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; }
+    button { margin-right: 8px; }
+    #transcript { margin-top: 16px; padding: 12px; border: 1px solid #ddd; min-height: 60px; }
+    #log { margin-top:12px; font-size: 13px; color:#333 }
+  </style>
+</head>
+<body>
+  <h1>Era Agent — Voice UI</h1>
+  <p>Click <b>Start Listening</b> and speak a command (e.g. "open notepad", "search for cats").</p>
+  <div>
+    <button id="start">Start Listening</button>
+    <button id="stop" disabled>Stop Listening</button>
+    <button id="send" disabled>Send Last</button>
+  </div>
+  <div id="transcript">Waiting...</div>
+  <div id="log"></div>
+
+<script>
+(function(){
+  const transcriptEl = document.getElementById('transcript');
+  const logEl = document.getElementById('log');
+  const startBtn = document.getElementById('start');
+  const stopBtn = document.getElementById('stop');
+  const sendBtn = document.getElementById('send');
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SpeechRecognition){
+    transcriptEl.textContent = 'SpeechRecognition API not supported in this browser.';
+    startBtn.disabled = true;
+    return;
+  }
+
+  let recognition = new SpeechRecognition();
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  let lastTranscript = '';
+
+  recognition.onresult = (ev) => {
+    const text = ev.results[0][0].transcript.trim();
+    lastTranscript = text;
+    transcriptEl.textContent = text;
+    sendBtn.disabled = false;
+    log('Heard: ' + text);
+  };
+  recognition.onerror = (ev) => { log('Recognition error: ' + ev.error); };
+  recognition.onend = () => { startBtn.disabled = false; stopBtn.disabled = true; log('Stopped listening'); };
+
+  startBtn.addEventListener('click', ()=>{
+    try{
+      recognition.start();
+      transcriptEl.textContent = 'Listening...';
+      startBtn.disabled = true; stopBtn.disabled = false; sendBtn.disabled = true;
+      log('Listening started');
+    }catch(e){ log('Start error: '+e); }
+  });
+  stopBtn.addEventListener('click', ()=>{ recognition.stop(); });
+
+  // Simple intent mapping and POST to Era Agent API
+  async function sendCommand(text){
+    if(!text) return;
+    const lower = text.toLowerCase();
+    let payload = { command: 'open_app', params: { app_name: text } };
+
+    if(lower.startsWith('open ')){
+      const app = text.slice(5).trim();
+      payload = { command:'open_app', params:{ app_name: app } };
+    } else if(lower.startsWith('search for ')){
+      const q = encodeURIComponent(text.slice(11).trim());
+      payload = { command: 'open_browser', params: { url: 'https://www.google.com/search?q='+q } };
+    } else if(lower.startsWith('search ')){
+      const q = encodeURIComponent(text.slice(7).trim());
+      payload = { command: 'open_browser', params: { url: 'https://www.google.com/search?q='+q } };
+    } else if(lower.startsWith('open browser') || lower.startsWith('open chrome') ){ 
+      payload = { command:'open_browser', params: { url: 'https://www.google.com' } };
+    } else if(lower.includes('whatsapp')){
+      // fallback: open WhatsApp web
+      payload = { command:'open_whatsapp', params: { phone: '+10000000000', message: text } };
+    }
+
+    log('Sending: ' + JSON.stringify(payload));
+    try{
+      const resp = await fetch('http://127.0.0.1:8000/execute', {
+        method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
+      });
+      const data = await resp.json();
+      log('Response: ' + JSON.stringify(data));
+    }catch(e){ log('Network error: ' + e); }
+  }
+
+  sendBtn.addEventListener('click', ()=> sendCommand(lastTranscript));
+
+  function log(msg){
+    const now = new Date().toLocaleTimeString();
+    logEl.textContent = now + ' — ' + msg + '\n' + logEl.textContent;
+  }
+})();
+</script>
+</body>
+</html>

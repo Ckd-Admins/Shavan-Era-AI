@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../era_bridge"
+		},
+		{
+			"path": "../../era_agent"
+		}
+	],
+	"settings": {}
+}

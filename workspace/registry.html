@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Ira Camera Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .register-container {
+            background-color: #34495e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            width: 350px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #ecf0f1;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #bdc3c7;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            box-sizing: border-box;
+            background-color: #ecf0f1;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #27ae60;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Register</h2>
+        <form id="registerForm" onsubmit="return validateAndLogin(event)">
+            <div class="form-group">
+                <label for="rollNumber">Roll Number:</label>
+                <input type="text" id="rollNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" pattern="[0-9]{10}" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth (DOB):</label>
+                <input type="date" id="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email ID:</label>
+                <input type="email" id="email" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function validateAndLogin(event) {
+            event.preventDefault(); // Prevent standard form submission
+
+            const form = document.getElementById('registerForm');
+            if (form.checkValidity()) {
+                // All fields are valid
+                window.location.href = 'index.html'; // Redirect to index
+            } else {
+                // This part might not be needed because 'required' handles it,
+                // but for extra feedback or custom validation:
+                alert('Invaid Input! Please fill all details correctly.');
+            }
+        }
+    </script>
+</body>
+</html>

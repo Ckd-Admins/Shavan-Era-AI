@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../era_agent"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "era-voice-assistant"
+	}
+}

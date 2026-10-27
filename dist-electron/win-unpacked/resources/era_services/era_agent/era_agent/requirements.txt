@@ -1,0 +1,17 @@
+# Era Agent for Windows -- dependencies
+#
+# The interactive CLI (main.py) and all commands in commands/ use only
+# the Python standard library -- nothing to install for those.
+#
+# The FastAPI server (api_server.py), which lets the Era assistant
+# (built in Google AI Studio) call this agent over HTTP, needs the
+# packages below.
+
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.29,<1.0
+pydantic>=2.0,<3.0
+
+# Optional, for future versions:
+# requests>=2.31        # outbound HTTP calls to the Era assistant / API backend
+requests>=2.31
+# python-dotenv>=1.0     # loading API keys and config from a .env file

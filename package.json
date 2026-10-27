@@ -1,0 +1,125 @@
+{
+  "name": "era-ai-assistant",
+  "productName": "Era AI Assistant",
+  "description": "Standalone AI Voice & Vision Assistant with Local Windows OS Automation",
+  "author": "Era AI Team",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "tsx server.ts",
+    "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --sourcemap --outfile=dist/server.cjs",
+    "start": "node dist/server.cjs",
+    "electron:dev": "concurrently \"tsx server.ts\" \"electron electron/main.cjs --dev\"",
+    "electron:start": "electron electron/main.cjs",
+    "dist": "npm run build && electron-builder",
+    "pack": "npm run build && electron-builder --dir",
+    "clean": "rm -rf dist server.js dist-electron",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^2.4.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@types/pg": "^8.20.0",
+    "@types/three": "^0.185.4",
+    "@vitejs/plugin-react": "^5.0.4",
+    "dotenv": "^17.2.3",
+    "drizzle-kit": "^0.31.10",
+    "drizzle-orm": "^0.45.2",
+    "express": "^4.21.2",
+    "firebase": "^12.16.0",
+    "firebase-admin": "^14.2.0",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "pg": "^8.22.0",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "three": "^0.185.1",
+    "vite": "^6.2.3",
+    "ws": "^8.21.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@types/ws": "^8.18.1",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^10.0.5",
+    "cross-env": "^10.1.0",
+    "electron": "^44.2.0",
+    "electron-builder": "^26.15.3",
+    "esbuild": "^0.25.0",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3"
+  },
+  "build": {
+    "appId": "com.era.assistant",
+    "productName": "ERA AI Assistant",
+    "copyright": "Copyright Â© 2026 ERA AI Team",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "asar": false,
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "assets/**/*",
+      "config/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/python_runtime",
+        "to": "python_runtime",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "resources/era_services/era_agent",
+        "to": "era_services/era_agent",
+        "filter": ["**/*", "!.venv/**", "!__pycache__/**", "!.pytest_cache/**"]
+      },
+      {
+        "from": "resources/era_services/era_bridge",
+        "to": "era_services/era_bridge",
+        "filter": ["**/*", "!.venv/**", "!__pycache__/**", "!.pytest_cache/**"]
+      },
+      {
+        "from": "resources/era_services/era_vision",
+        "to": "era_services/era_vision",
+        "filter": ["**/*", "!.venv/**", "!__pycache__/**", "!.pytest_cache/**"]
+      }
+    ],
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ],
+      "icon": "assets/icon.ico",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "ERA AI Assistant",
+      "menuCategory": "ERA AI",
+      "installerHeader": "assets/icon.ico",
+      "installerSidebar": "assets/icon.png",
+      "uninstallDisplayName": "ERA AI Assistant",
+      "deleteAppDataOnUninstall": false,
+      "include": null
+    },
+    "portable": {
+      "artifactName": "ERA_Portable_${version}.exe"
+    },
+    "compression": "normal",
+    "publish": null
+  }
+}

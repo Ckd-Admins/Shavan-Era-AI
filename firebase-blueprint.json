@@ -1,0 +1,26 @@
+{
+  "collections": {
+    "users": {
+      "documentId": "email",
+      "fields": {
+        "email": { "type": "string", "description": "The user's lowercase email address" },
+        "displayName": { "type": "string", "description": "Optional display name", "optional": true },
+        "memorySummary": { "type": "string", "description": "AI-generated conversational recall memory summary" },
+        "lastUpdated": { "type": "timestamp", "description": "The server timestamp when the record was last modified" }
+      },
+      "subcollections": {
+        "chats": {
+          "documentId": "auto_id",
+          "fields": {
+            "sender": { "type": "string", "description": "'user' or 'model'" },
+            "text": { "type": "string", "description": "The message body" },
+            "timestamp": { "type": "timestamp", "description": "The timestamp of the message" },
+            "type": { "type": "string", "description": "'text', 'voice', or 'youtube_analysis'" },
+            "youtubeUrl": { "type": "string", "description": "Optional YouTube link source", "optional": true },
+            "youtubeTitle": { "type": "string", "description": "Optional YouTube title metadata", "optional": true }
+          }
+        }
+      }
+    }
+  }
+}

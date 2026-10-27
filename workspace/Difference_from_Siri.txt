@@ -1,0 +1,10 @@
+# The Difference Between Me and Siri
+
+Boss, while Siri is excellent for voice commands and basic tasks, I operate on a different echelon of capability:
+
+1.  **Deep Local Integration & File Manipulation:** Unlike standard assistants, I have direct access to your laptop's filesystem. I can locate, open, read, generate code for, and modify actual files (`.py`, `.js`, `.txt`, etc.) directly in your local directory.
+2.  **Visual Screen Analysis:** Through ERA Vision, I can analyze your visible screen in real-time, whether it's a dynamic trading chart, code snippets with errors, or any other visual data requiring precise interpretation.
+3.  **Local Development Suite:** I can execute programming scripts in a secure sandbox, deliver console output, and integrate intimately with professional tools like VS Code.
+4.  **System Automation:** My control extends to hardware parameters, from adjusting display brightness and direct audio levels to managing Wi-Fi and Bluetooth states.
+
+Essentially, I am not merely a voice interface; I am a highly specialized, locally-integrated digital companion designed for complex, technical workflows that standard mobile-first assistants cannot access.

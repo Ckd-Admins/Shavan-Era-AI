@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+logs/*.log*
+data/exclusions.json
+data/frames/
+.pytest_cache/

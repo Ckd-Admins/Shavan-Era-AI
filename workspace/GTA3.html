@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GTA Map Structure</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f0f0; }
+        #map-container {
+            width: 80%;
+            height: 600px;
+            border: 2px solid #333;
+            margin: 20px auto;
+            background-color: #a3d9a5; /* Representing land */
+            position: relative;
+        }
+        .road {
+            background-color: #555;
+            position: absolute;
+        }
+        .building {
+            background-color: #b33;
+            position: absolute;
+            border: 1px solid #777;
+        }
+        /* Example layout */
+        #road1 { width: 100%; height: 20px; top: 50%; }
+        #road2 { width: 20px; height: 100%; left: 50%; }
+        #building1 { width: 100px; height: 100px; top: 100px; left: 100px; }
+        #building2 { width: 150px; height: 80px; bottom: 100px; right: 100px; }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">GTA Map Simulation</h1>
+    <div id="map-container">
+        <div id="road1" class="road"></div>
+        <div id="road2" class="road"></div>
+        <div id="building1" class="building">Building A</div>
+        <div id="building2" class="building">Building B</div>
+    </div>
+</body>
+</html>

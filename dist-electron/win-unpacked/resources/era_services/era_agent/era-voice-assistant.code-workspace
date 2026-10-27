@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../era-voice-assistant"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../era_bridge"
+		}
+	],
+	"settings": {
+		"powershell.cwd": "era-voice-assistant"
+	}
+}

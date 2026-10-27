@@ -1,0 +1,5 @@
+{
+  "centralUrl": "",
+  "telemetryEnabled": false,
+  "_comment": "Set centralUrl to your ERA Central HTTPS URL (e.g. https://central.yourdomain.com) to enable device telemetry. Leave empty to keep telemetry disabled. Never commit production credentials here."
+}

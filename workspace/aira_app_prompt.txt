@@ -1,0 +1,1 @@
+Create for me a standalone desktop application for an AI assistant named Ira, complete with its own unique icon. This application should integrate all of Ira's current features, be easily shareable, and be designed for direct installation on laptops.

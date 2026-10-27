@@ -1,0 +1,6 @@
+{
+  "name": "ERA Voice Assistant",
+  "description": "Real-time, voice-to-voice sassy AI assistant using Gemini Live API",
+  "requestFramePermissions": ["microphone", "display-capture", "bluetooth"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
